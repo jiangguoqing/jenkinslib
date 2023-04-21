@@ -49,7 +49,7 @@ def Sonar() {
  * https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token
  */
 
-podTemplate(yaml: '''
+def podTemplate(yaml: '''
               kind: Pod
               spec:
                 containers:
