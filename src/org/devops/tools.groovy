@@ -13,18 +13,20 @@ def PrintMes(value,color){
 }
 
 
-def Docker_Build(tag){
+def Docker_Build(images_tag,images_name){
               sh 'echo ---'
               println(tag)
-              sh "docker build -t mrjiangguoqing/jgq:$tag ."
+              sh "docker build -t $images_name:$images_tag ."
               //sh 'docker build -t mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5 .'
               sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker images'              
-              sh 'docker push mrjiangguoqing/jgq:${tag}'
+              sh "docker push $images_name:$tag"
               //sh 'docker push mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5'
               sh '''
               echo "you did it!!!!!!!  yes!!"
               '''
+              def image = "images_name:$tag"
+              return image
 }
 
 
