@@ -17,6 +17,7 @@ def Docker_Build(){
               sh 'docker build -t mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5 .'
               sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker push mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5'
+              sh 'docker images'
               sh '''
               echo "you did it!!!!!!!  yes!!"
               '''
