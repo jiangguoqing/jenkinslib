@@ -16,8 +16,7 @@ def PrintMes(value,color){
 def Docker_Build(tag){
               sh 'echo ---'
               println(tag)
-              sh 'echo this'
-              sh 'docker build -t mrjiangguoqing/jgq:${tag} .'
+              sh "docker build -t mrjiangguoqing/jgq:$tag ."
               //sh 'docker build -t mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5 .'
               sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker images'              
