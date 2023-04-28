@@ -13,13 +13,13 @@ def PrintMes(value,color){
 }
 
 
-def Docker_Build(){
+def Docker_Build(tag){
               sh '${developmentTag}'
-              sh 'docker build -t mrjiangguoqing/jgq:${developmentTag} .'
+              sh 'docker build -t mrjiangguoqing/jgq:${tag} .'
               //sh 'docker build -t mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5 .'
               sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker images'              
-              sh 'docker push mrjiangguoqing/jgq:${developmentTag}'
+              sh 'docker push mrjiangguoqing/jgq:${tag}'
               //sh 'docker push mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5'
               sh '''
               echo "you did it!!!!!!!  yes!!"
