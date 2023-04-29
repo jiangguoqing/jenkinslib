@@ -20,7 +20,7 @@ def Docker_Build(images_name,images_tag){
               //sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker images'
               sh "echo $images_tag $images_name"
-              def newApp = docker.build "$images_name:1"
+              def newApp = docker.build "$images_name:${images_tag}"
               newApp.push()
               //sh "docker push $images_name:$images_tag"
               //sh 'docker push mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5'
