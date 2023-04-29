@@ -21,7 +21,7 @@ def Docker_Build(images_name,images_tag){
               //sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker images'
               sh "echo $images_tag $images_name"
-              docker.withRegistry('https://566420885017.dkr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
+              docker.withRegistry('https://566420885017.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
               def newApp = docker.build "$images_name:${images_tag}"
               newApp.push()
               }
