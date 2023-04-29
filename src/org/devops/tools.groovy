@@ -24,8 +24,8 @@ def Docker_Build(images_name,images_tag){
               sh '''
               echo "you did it!!!!!!!  yes!!"
               '''
-              def image = "$images_name:$images_tag"
-              return image
+              //def image = "$images_name:$images_tag"
+              //return image
 }
 
 
