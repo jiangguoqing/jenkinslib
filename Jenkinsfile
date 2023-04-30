@@ -128,23 +128,23 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 }
 			}
 		}
-/*
+
         stage('juge-branch') {
             steps {
                 script{
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
-                if (${branchname} == "release"){
+                if ("${branchname}" == "release"){
                 tools.Docker_Build(repo,developmentTag)
                 }
 
-                if (${branchname} == "master"){
+                if ("${branchname}" == "master"){
                 tools.Docker_Build(repo,developmentTag)
                 }
                 }
             }
         }
 
-*/
+
         stage('Example') {
             steps {
                 echo "Hello ${params.PERSON}"
