@@ -131,6 +131,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 
         stage('Example') {
             steps {
+                script{
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
                 if ($branchname == "release"){
                 tools.Docker_Build(repo,developmentTag)
@@ -138,6 +139,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 
                 if ($branchname == "master"){
                 tools.Docker_Build(repo,developmentTag)
+                }
                 }
             }
         }
