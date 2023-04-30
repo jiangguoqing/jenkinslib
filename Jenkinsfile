@@ -128,7 +128,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 }
 			}
 		}
-
+/*
         stage('juge-branch') {
             steps {
                 script{
@@ -144,7 +144,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             }
         }
 
-
+*/
         stage('Example') {
             steps {
                 echo "Hello ${params.PERSON}"
