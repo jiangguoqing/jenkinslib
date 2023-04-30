@@ -129,7 +129,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 			}
 		}
 
-        stage('Example') {
+        stage('juge-branch') {
             steps {
                 script{
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
