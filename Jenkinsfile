@@ -142,6 +142,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 tools.Docker_Build(repo,developmentTag)
                 }
 
+
                 if ("${branchname}" == "master"){
                 tools.Docker_Build(repo,developmentTag)
                 }
