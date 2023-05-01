@@ -146,7 +146,8 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "docker pull 566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java:dev-67ec5d49-1682913360"
            }
                 sh "docker images"
-                sh "image = echo ${latest_tag}| sed 's/dev/release/g'"
+                def image
+                sh "${image} = echo ${latest_tag}| sed 's/dev/release/g'"
                 sh "echo ${image}"
                 }
 
