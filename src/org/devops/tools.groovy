@@ -15,13 +15,6 @@ def PrintMes(value,color){
 
 
 def Docker_Build(images_name,images_tag,branchname){
-            if ("${branchname}" == "release"){
-                sh "docker pull ${latest_tag}"
-                def image
-                sh "image = echo ${latest_tag}| sed 's/dev/release/g'"
-            }
-
-
               properties([
                 parameters([
                   string(defaultValue: "$images_name:${images_tag}", description: 'Variable description', name: 'latest_tag', trim: true)
