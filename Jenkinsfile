@@ -139,7 +139,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 container('docker'){
                 script{
                 if ("${branchname}" == "release"){
-                params.skip_stage = true
+                sh "$params.skip_stage = true"
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
@@ -157,7 +157,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 }
 
                 if ("${branchname}" == "master"){
-                //params.skip_stage = true
+                sh "$params.skip_stage = true"
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
