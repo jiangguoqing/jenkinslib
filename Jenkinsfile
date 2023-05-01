@@ -140,6 +140,7 @@ checkout scmGit(branches: [[name: "*/release"]], extensions: [], userRemoteConfi
                 //把镜像拉到本地，然后tag一个新的标签，在cd就行了。
                 if ("${branchname}" == "release"){
                 sh "echo ${latest_tag}"
+                sh "echo I am there"
                 tools.Docker_Build(repo,developmentTag)
                 }
 
