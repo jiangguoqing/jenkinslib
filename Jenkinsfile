@@ -146,9 +146,8 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "docker pull 566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java:dev-67ec5d49-1682913360"
            }
                 sh "docker images"
-                def image
-                sh "${image} = echo ${latest_tag}| sed 's/dev/release/g'"
-                sh "echo ${image}"
+                sh "echo ${latest_tag} > a.txt"
+                sh "sed -e 's/dev/release/' a.txt"
                 }
 
                 if ("${branchname}" == "master"){
