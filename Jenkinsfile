@@ -134,7 +134,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 
         stage('juge-branch') {
             steps {
-                  container('docker'){
+                container('docker'){
                 script{
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
                 //变量必须加在双引号内
@@ -142,11 +142,11 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 if ("${branchname}" == "release"){
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
-                tools.Docker_Build(repo,developmentTag)
+                tools.Docker_Build(repo,developmentTag,"test")
                 }
 
                 if ("${branchname}" == "master"){
-                tools.Docker_Build(repo,developmentTag)
+                tools.Docker_Build(repo,developmentTag,"test")
                 }
                 }
                 }
