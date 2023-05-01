@@ -143,7 +143,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
                 docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
-                def newApp = docker.pull "${latest_tag}"
+                sh "docker pull ${latest_tag}"
            }
                 sh "docker pull ${latest_tag}"
                 def image
