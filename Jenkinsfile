@@ -4,7 +4,7 @@
 
 
 def tools = new org.devops.tools()
-String srcurl = "${env.srcUrl}"
+String srcurl = "http://159.223.41.2:30615/root/ta"
 String branchname = "${env.gitbranchName}"
 String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java"
 
