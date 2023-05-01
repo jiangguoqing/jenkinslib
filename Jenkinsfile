@@ -123,17 +123,22 @@ parameters {
 			steps{
                 script {
                 branchname = ref - "refs/heads/"
+
                 tools.PrintMes("获取代码","yellow")
 checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'f286958b-d924-4f6e-8720-7a63a2c44717', url: '${srcUrl}']])
                 }
 			}
 		}
 
+
         stage('juge-branch') {
             steps {
                 script{
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
+                //变量必须加在双引号内
+                //把镜像拉到本地，然后tag一个新的标签，在cd就行了。
                 if ("${branchname}" == "release"){
+                sh "echo ${latest_tag}"
                 tools.Docker_Build(repo,developmentTag)
                 }
 
@@ -232,6 +237,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                     sh "echo  -----------"
                     sh "echo ${developmentTag}"
                     tools.Docker_Build(repo,developmentTag)
+
                 }
             }
          }

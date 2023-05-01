@@ -25,6 +25,11 @@ def Docker_Build(images_name,images_tag){
               def newApp = docker.build "$images_name:${images_tag}"
               newApp.push()
               }
+              properties([
+                parameters([
+                  string(defaultValue: "$images_name:${images_tag}", description: 'Variable description', name: 'latest_tag', trim: true)
+                ])
+              ])
               //sh "docker push $images_name:$images_tag"
               //sh 'docker push mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5'
               sh '''
