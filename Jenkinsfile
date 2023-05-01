@@ -146,10 +146,12 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
                 docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
-                //sh "docker pull 566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java:dev-67ec5d49-1682913360"
+                sh "docker pull 566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java:dev-67ec5d49-1682913360"
            }
                 sh "docker images"
-                docker tag ${latest_tag} "$repo:${developmentTag}"
+                sh "docker tag ${latest_tag} $repo:${developmentTag}"
+                docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
+                sh "docker push  $repo:${developmentTag}"}
                 }
 
                 if ("${branchname}" == "master"){
