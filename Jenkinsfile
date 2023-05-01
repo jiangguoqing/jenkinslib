@@ -148,6 +148,9 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "docker images"
                 sh "echo ${latest_tag} > a.txt"
                 sh "sed -e 's/dev/release/' a.txt"
+                sh "newtag = 'cat a.txt' "
+                sh "echo ${newtag}"
+                sh "docker tag ${latest_tag} "
                 }
 
                 if ("${branchname}" == "master"){
