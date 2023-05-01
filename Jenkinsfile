@@ -137,21 +137,21 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             steps {
                 container('docker'){
                 script{
+                if ("${branchname}" == "release"){
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
                 //变量必须加在双引号内
                 //把镜像拉到本地，然后tag一个新的标签，在cd就行了。
-                if ("${branchname}" == "release"){
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
                 docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
-                sh "docker pull 566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java:dev-67ec5d49-1682913360"
-           }
+                sh "docker pull ${latest_tag}"
                 sh "docker images"
                 sh "docker tag ${latest_tag} $repo:${developmentTag}"
-                docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
                 sh "docker push  $repo:${developmentTag}"}
+                sh "echo really nice!"
+                }
                 }
 
                 if ("${branchname}" == "master"){
