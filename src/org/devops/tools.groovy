@@ -14,7 +14,7 @@ def PrintMes(value,color){
 
 
 
-def Docker_Build(images_name,images_tag){
+def Docker_Build(images_name,images_tag,branchname){
             if ("${branchname}" == "release"){
                 sh "docker pull ${latest_tag}"
                 def image
