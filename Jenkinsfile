@@ -149,7 +149,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "docker pull ${latest_tag}"
                 sh "docker images"
                 sh "docker tag ${latest_tag} $repo:${developmentTag}"
-                sh "docker push  $repo:${developmentTag}"}
+                sh "docker push  $repo:${developmentTag}"
                 sh "echo really nice!"
                 }
                 }
