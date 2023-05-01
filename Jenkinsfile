@@ -123,7 +123,7 @@ parameters {
 			steps{
                 script {
                 branchname = ref - "refs/heads/"
-                sh "echo ${branchname}"
+                sh "echo ${branchname}  ${srcurl}"
 
                 tools.PrintMes("获取代码","green")
 checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'f286958b-d924-4f6e-8720-7a63a2c44717', url: "${srcurl}"]])
