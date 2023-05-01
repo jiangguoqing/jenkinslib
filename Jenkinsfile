@@ -142,11 +142,13 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 if ("${branchname}" == "release"){
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
-                tools.Docker_Build(repo,developmentTag,"test")
+                sh "docker pull ${latest_tag}"
+                def image
+                sh "image = echo ${latest_tag}| sed 's/dev/release/g'"
                 }
 
                 if ("${branchname}" == "master"){
-                tools.Docker_Build(repo,developmentTag,"test")
+                tools.Docker_Build(repo,developmentTag,"${branchname}")
                 }
                 }
                 }
