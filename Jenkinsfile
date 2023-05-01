@@ -256,7 +256,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 //        }
 
         stage('Build') {
-            when { expression { ${skip} != true } }
+            when { expression { "${skip}" != "true" } }
             steps {
                 container('docker'){
                  script {
