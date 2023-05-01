@@ -7,6 +7,7 @@ def tools = new org.devops.tools()
 String srcurl = "http://159.223.41.2:30615/root/ta"
 String branchname = "${env.gitbranchName}"
 String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java"
+String skip = ""
 
 
 environment {
@@ -139,7 +140,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 container('docker'){
                 script{
                 if ("${branchname}" == "release"){
-                sh "$params.skip_stage = true"
+                skip = "true"
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
@@ -157,7 +158,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 }
 
                 if ("${branchname}" == "master"){
-                sh "$params.skip_stage = true"
+                skip = "true"
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
@@ -255,7 +256,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 //        }
 
         stage('Build') {
-            when { expression { params.skip_stage != true } }
+            when { expression { ${skip} != true } }
             steps {
                 container('docker'){
                  script {
