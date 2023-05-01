@@ -70,6 +70,7 @@ pipeline {
 parameters {
   string defaultValue: 'http://159.223.41.2:30615/root/ta', name: 'srcurl'
   choice choices: ['dev','master', 'dev'], name: 'gitbranchname'
+  booleanParam(name: 'skip_stage', defaultValue: false, description: 'Set to true to skip the test stage')
 }
 
 
@@ -138,6 +139,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 container('docker'){
                 script{
                 if ("${branchname}" == "release"){
+                params.skip_stage = true
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
@@ -155,8 +157,24 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 }
 
                 if ("${branchname}" == "master"){
-                tools.Docker_Build(repo,developmentTag,"${branchname}")
+                params.skip_stage = true
+                gitCommit = env.GIT_COMMIT.substring(0,8)
+                unixTime = (new Date().time.intdiv(1000))
+                developmentTag = "${branchname}-${gitCommit}-${unixTime}"
+                //变量必须加在双引号内
+                //把镜像拉到本地，然后tag一个新的标签，在cd就行了。
+                sh "echo ${latest_tag}"
+                sh "echo I am there"
+                docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
+                sh "docker pull ${latest_tag}"
+                sh "docker images"
+                sh "docker tag ${latest_tag} $repo:${developmentTag}"
+                sh "docker push  $repo:${developmentTag}"
+                sh "echo really nice!"
                 }
+                }
+
+
                 }
                 }
             }
@@ -237,6 +255,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 //        }
 
         stage('Build') {
+            when { expression { params.skip_stage != true } }
             steps {
                 container('docker'){
                  script {
