@@ -20,6 +20,7 @@ unixTime = ''
 developmentTag = ''
 releaseTag = ''
 image_name = 'mrjiangguoqing/jgq:1.0'
+newtag = ''
 
 pipeline {
     agent  {
@@ -148,8 +149,8 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "docker images"
                 sh "echo ${latest_tag} > a.txt"
                 sh "sed -e 's/dev/release/' a.txt"
-                sh "newtag = 'cat a.txt';echo $newtag "
-                sh "echo $newtag"
+                sh "${newtag} = 'cat a.txt';echo ${newtag} "
+                //sh "echo $newtag"
                 sh "docker tag ${latest_tag} "
                 }
 
