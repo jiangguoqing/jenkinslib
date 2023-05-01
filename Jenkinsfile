@@ -133,7 +133,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 			}
 		}
 
-/*
+
         stage('juge-branch') {
             steps {
                 container('docker'){
@@ -155,7 +155,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "echo really nice!"
                 }
                 }
-
+/*
                 if ("${branchname}" == "master"){
                 params.skip_stage = true
                 gitCommit = env.GIT_COMMIT.substring(0,8)
@@ -173,13 +173,13 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 sh "echo really nice!"
                 }
                 }
-
+*/
 
                 }
                 }
             }
         }
-*/
+
 
         stage('Example') {
             steps {
