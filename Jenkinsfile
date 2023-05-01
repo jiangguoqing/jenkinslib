@@ -133,7 +133,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 			}
 		}
 
-
+/*
         stage('juge-branch') {
             steps {
                 container('docker'){
@@ -179,7 +179,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 }
             }
         }
-
+*/
 
         stage('Example') {
             steps {
