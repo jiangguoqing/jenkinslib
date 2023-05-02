@@ -67,9 +67,15 @@ pipeline {
          volumeMounts:
          - mountPath: /var/run
            name: cache-dir
+         - mountPath: /home/jgq/
+           name: jenkins-pvc
        volumes:
        - name: cache-dir
          emptyDir: {}
+       - name: jenkins-pvc
+         persistentVolumeClaim:
+           claimName: jenkins-claim
+
         '''.stripIndent()
           }
     }
@@ -201,6 +207,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                  container('maven'){
                      script {
                         sh "chmod +x ./mvnw"
+
                         sh "./mvnw clean package"
                      }
                  }
