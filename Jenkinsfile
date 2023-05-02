@@ -207,6 +207,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                  container('maven'){
                      script {
                         sh "chmod +x ./mvnw"
+                        sh "./mvnw -v"
 
                         sh "./mvnw clean package"
                      }
