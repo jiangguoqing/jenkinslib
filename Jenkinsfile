@@ -209,7 +209,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                         sh "chmod +x ./mvnw"
                         //sh "find / -name settings.xml"
                         //sh "echo <localRepository>/root/.m2</localRepository>  >> /usr/share/maven/conf/settings.xml"
-                        sh "./mvnw  install -Dmaven.test.skip=true -Dmaven.repo.local=/root/jgq"
+                        sh "./mvnw  install -Dmaven.test.skip=true -Dmaven.repo.local=/tmp/test/"
                      }
                  }
              }
