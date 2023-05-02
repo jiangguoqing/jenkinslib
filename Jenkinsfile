@@ -69,7 +69,9 @@ pipeline {
            name: cache-dir
        volumes:
        - name: cache-dir
-         emptyDir: {}
+         persistentVolumeClaim:
+           claimName: jenkins-claim
+
         '''.stripIndent()
           }
     }
@@ -195,17 +197,17 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             }
         }
 
-/*
+
          stage('maven build') {
              steps {
-                 container('docker'){
+                 container('maven'){
                      script {
-                        sh " package "
+                        sh "./mvnw clean package"
                      }
                  }
              }
          }
-*/
+
 
 
 
@@ -285,7 +287,6 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                     sh "mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd"
                     sh "chmod +x ./mvnw"
                     //sh "env"
-                    sh "./mvnw clean package"
                     sh "echo  -----------"
                     sh "echo ${developmentTag}"
                     tools.Docker_Build(repo,developmentTag,"${branchname}")
