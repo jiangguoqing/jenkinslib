@@ -60,6 +60,13 @@ pipeline {
          volumeMounts:
          - mountPath: /var/run
            name: cache-dir
+       - name: maven
+         image: 'maven:latest'
+         command: ["/bin/sh"]
+         args: ["-c","while true; do sleep 86400; done"]
+         volumeMounts:
+         - mountPath: /var/run
+           name: cache-dir
        volumes:
        - name: cache-dir
          emptyDir: {}
@@ -188,6 +195,17 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             }
         }
 
+/*
+         stage('maven build') {
+             steps {
+                 container('docker'){
+                     script {
+                        sh " package "
+                     }
+                 }
+             }
+         }
+*/
 
 
 
@@ -267,6 +285,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                     sh "mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd"
                     sh "chmod +x ./mvnw"
                     //sh "env"
+                    sh "./mvnw clean package"
                     sh "echo  -----------"
                     sh "echo ${developmentTag}"
                     tools.Docker_Build(repo,developmentTag,"${branchname}")
