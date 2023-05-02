@@ -208,7 +208,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                      script {
                         sh "chmod +x ./mvnw"
                         sh "./mvnw -v"
-
+                        sh "find / -name settings.xml"
                         sh "./mvnw clean package"
                      }
                  }
