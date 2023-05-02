@@ -72,6 +72,7 @@ pipeline {
          persistentVolumeClaim:
            claimName: jenkins-claim
 
+
         '''.stripIndent()
           }
     }
@@ -202,6 +203,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
              steps {
                  container('maven'){
                      script {
+                        sh "chmod +x ./mvnw"
                         sh "./mvnw clean package"
                      }
                  }
