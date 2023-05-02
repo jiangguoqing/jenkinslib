@@ -69,10 +69,7 @@ pipeline {
            name: cache-dir
        volumes:
        - name: cache-dir
-         persistentVolumeClaim:
-           claimName: jenkins-claim
-
-
+         emptyDir: {}
         '''.stripIndent()
           }
     }
