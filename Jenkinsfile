@@ -69,7 +69,6 @@ pipeline {
            name: cache-dir
          - mountPath: /root/
            name: jenkins-pvc
-           subpath: jgq
        volumes:
        - name: cache-dir
          emptyDir: {}
