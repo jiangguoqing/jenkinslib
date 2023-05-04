@@ -4,6 +4,7 @@
 
 
 def tools = new org.devops.tools()
+def jube  = new org.devops.juge_branch()
 
 //让配置在web界面。
 String srcurl = "http://159.223.41.2:30615/root/project-nodejs"
