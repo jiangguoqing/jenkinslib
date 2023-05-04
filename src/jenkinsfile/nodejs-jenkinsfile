@@ -9,7 +9,6 @@ def pull_code = new org.devops.pull_code()
 
 
 //让配置在web界面。
-String srcurl = "http://159.223.41.2:30615/root/project-nodejs"
 String branchname = "${env.gitbranchName}"
 String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs"
 String skip = ""
