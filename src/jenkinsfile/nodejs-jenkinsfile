@@ -5,11 +5,9 @@
 
 def tools = new org.devops.tools()
 def juge  = new org.devops.juge()
-def pull_code = new org.devops.pull_code()
-
 
 //让配置在web界面。
-//String srcurl = "http://159.223.41.2:30615/root/project-nodejs"
+String srcurl = "http://159.223.41.2:30615/root/project-nodejs"
 String branchname = "${env.gitbranchName}"
 String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs"
 String skip = ""
@@ -149,7 +147,8 @@ parameters {
                 sh "echo ${branchname}  ${srcurl}"
 
                 tools.PrintMes("获取代码","green")
-                pull_code.pull_code("${branchname}","${srcurl}")
+checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'f286958b-d924-4f6e-8720-7a63a2c44717', url: "${srcurl}"]])
+                }
 			}
 		}
 
@@ -302,6 +301,18 @@ parameters {
          }
         }
 
+ /*      stage('Deploy') {
+            steps {
+                script{
+                        docker.withRegistry('https://566420885017.dkr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                    }
+                }
+            }
+*/
+
+
 //
 /*        stage('scan with trivy') {
             steps {
@@ -366,4 +377,4 @@ post {
     }
     }
 }
-}
+
