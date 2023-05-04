@@ -8,20 +8,18 @@ def juge  = new org.devops.juge()
 def pull_code = new org.devops.pull_code()
 
 
-//让配置在web界面。
+
 String srcurl = "${env.gitsrcurl}"
 String branchname = "${env.gitbranchName}"
-String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs"
+
+//仓库地址
+String repo = "${env.gitrepo}"
+//分支判断
 String skip = ""
 
 
-environment {
-    DOCKER_BUILDKIT='1'
-}
-
 
 gitCommit = ''
-branchName = ''
 unixTime = ''
 developmentTag = ''
 releaseTag = ''
@@ -91,13 +89,12 @@ pipeline {
 parameters {
   string defaultValue: 'http://159.223.41.2:30615/root/project-nodejs', name: 'gitsrcurl'
   choice choices: ['dev','master', 'dev'], name: 'gitbranchname'
-  booleanParam(name: 'skip_stage', defaultValue: false, description: 'Set to true to skip the test stage')
+  string defaultValue: '566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs', name: 'gitrepo'
 }
 
 
     options {
         timestamps()
-//        skip
     }
 
   triggers {
@@ -212,21 +209,8 @@ parameters {
         }
 
 */
-        stage('Example') {
-            steps {
-                echo "Hello ${params.PERSON}"
-            }
-        }
 
 
-
-
-/*    stage('Some step') {
-      steps {
-        sh "echo $ref"
-      }
-    }
-*/
 
 
 /*        stage("stage 1: Test dingding notify") {
@@ -266,15 +250,7 @@ parameters {
 		}
 
 */
-        stage('code scan') {
-            steps {
-                timeout(time:5, unit:"MINUTES"){
-                    script{
-                        println("check code")
-                    }
-                }
-            }
-        }
+
 
 //        stage ('test') {
 //            steps {
