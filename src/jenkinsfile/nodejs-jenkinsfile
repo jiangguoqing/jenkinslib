@@ -5,7 +5,7 @@
 
 def tools = new org.devops.tools()
 
-
+//让配置在web界面。
 String srcurl = "http://159.223.41.2:30615/root/project-nodejs"
 String branchname = "${env.gitbranchName}"
 String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs"
@@ -152,6 +152,18 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
 		}
 
 
+        stage("juge-branch"){
+            steps{
+                script{
+                    tools.PrintMes("开始打包啦","green")
+                    //build.Build(buildType,buildShell)
+                    juge.juge_branch()
+                }
+            }
+        }
+
+
+/*
         stage('juge-branch') {
             steps {
                 container('docker'){
@@ -196,7 +208,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             }
         }
 
-
+*/
         stage('Example') {
             steps {
                 echo "Hello ${params.PERSON}"
