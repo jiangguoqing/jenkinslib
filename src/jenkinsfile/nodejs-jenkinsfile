@@ -158,7 +158,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 script{
                     tools.PrintMes("开始打包啦","green")
                     //build.Build(buildType,buildShell)
-                    juge.juge_branch()
+                    juge.juge_branch("${branchname}","")
                 }
             }
         }
