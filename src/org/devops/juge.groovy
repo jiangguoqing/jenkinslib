@@ -1,7 +1,7 @@
 package org.devops
 
 
-def juge_branch(){
+def juge_branch(branchname){
                 if ("${branchname}" == "release"){
                 skip = "true"
                 gitCommit = env.GIT_COMMIT.substring(0,8)
