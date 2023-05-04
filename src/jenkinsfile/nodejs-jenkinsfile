@@ -1,22 +1,21 @@
-//不要使用单引号
+
 
 @Library('sharedlib')
 
 
 def tools = new org.devops.tools()
 
-//项目地址变化
+
 String srcurl = ""
 String branchname = "${env.gitbranchName}"
-//镜像仓库变化
-String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/java"
+String repo = "566420885017.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs"
 String skip = ""
 
 
 environment {
     DOCKER_BUILDKIT='1'
 }
-//不要使用单引号
+
 
 gitCommit = ''
 branchName = ''
@@ -24,8 +23,8 @@ unixTime = ''
 developmentTag = ''
 releaseTag = ''
 
-//镜像名称变化
-image_name = 'mrjiangguoqing/jgq:1.0'
+
+image_name = 'mrjiangguoqing/nodejs:1.0'
 newtag = ''
 
 pipeline {
@@ -85,7 +84,7 @@ pipeline {
           }
     }
 
-//读取不到，怎么读取？默认怎么设定
+
 parameters {
   string defaultValue: 'http://159.223.41.2:30615/root/ta', name: 'srcurl'
   choice choices: ['dev','master', 'dev'], name: 'gitbranchname'
@@ -162,8 +161,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
-                //变量必须加在双引号内
-                //把镜像拉到本地，然后tag一个新的标签，在cd就行了。
+
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
                 docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
@@ -180,8 +178,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 gitCommit = env.GIT_COMMIT.substring(0,8)
                 unixTime = (new Date().time.intdiv(1000))
                 developmentTag = "${branchname}-${gitCommit}-${unixTime}"
-                //变量必须加在双引号内
-                //把镜像拉到本地，然后tag一个新的标签，在cd就行了。
+
                 sh "echo ${latest_tag}"
                 sh "echo I am there"
                 docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
@@ -205,21 +202,6 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                 echo "Hello ${params.PERSON}"
             }
         }
-
-
-         stage('maven build') {
-             steps {
-                 container('maven'){
-                     script {
-                        sh "chmod +x ./mvnw"
-                        sh "unset $MAVEN_CONFIG"
-                        //sh "find / -name settings.xml"
-                        //sh "echo <localRepository>/root/.m2</localRepository>  >> /usr/share/maven/conf/settings.xml"
-                        sh "./mvnw  clean package "
-                     }
-                 }
-             }
-         }
 
 
 
@@ -296,9 +278,6 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                     gitCommit = env.GIT_COMMIT.substring(0,8)
                     unixTime = (new Date().time.intdiv(1000))
                     developmentTag = "${branchname}-${gitCommit}-${unixTime}"
-                    sh "mkdir -p /sys/fs/cgroup/systemd"
-                    sh "mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd"
-                    sh "chmod +x ./mvnw"
                     //sh "env"
                     sh "echo  -----------"
                     sh "echo ${developmentTag}"
