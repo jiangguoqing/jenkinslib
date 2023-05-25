@@ -80,7 +80,7 @@ parameters {
 //        skip
     }
 
-  triggers {
+/*  triggers {
     GenericTrigger(
      genericVariables: [
       [key: 'ref', value: '$.ref'],
@@ -99,7 +99,7 @@ parameters {
      printPostContent: true
     )
   }
-
+*/
 
 triggers {
   GenericTrigger (causeString: 'Generic Cause', 
