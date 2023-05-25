@@ -102,8 +102,9 @@ parameters {
 */
 
 triggers {
-  GenericTrigger (causeString: 'Generic Cause', 
-   genericVariables: [
+  GenericTrigger (
+    causeString: 'Generic Cause', 
+    genericVariables: [
     [defaultValue: '', key: 'changed_files', regexpFilter: '', value: '$.commits[*].[\'modified\',\'added\',\'removed\'][*]'], 
     [defaultValue: '', key: 'ref', regexpFilter: '', value: '$.ref']
     ], 
@@ -143,6 +144,8 @@ triggers {
                 script {
                 branchname = ref - "refs/heads/"
                 sh "echo ${branchname}  ${srcurl}"
+                sh "----"
+                sh "${srcurl}"
 
                 tools.PrintMes("获取代码","green")
 checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'f286958b-d924-4f6e-8720-7a63a2c44717', url: "${srcurl}"]])
