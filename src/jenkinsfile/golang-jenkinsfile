@@ -101,7 +101,6 @@ parameters {
   }
 
 */
-
 triggers {
   GenericTrigger causeString: 'Generic Cause', 
    genericVariables: [
