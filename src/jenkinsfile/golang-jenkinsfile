@@ -144,7 +144,7 @@ triggers {
                 script {
                 branchname = ref - "refs/heads/"
                 sh "echo ${branchname}  ${srcurl}"
-                sh "----"
+                sh "echo ----"
                 sh "${srcurl}"
 
                 tools.PrintMes("获取代码","green")
