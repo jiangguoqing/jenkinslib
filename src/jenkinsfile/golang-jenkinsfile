@@ -80,7 +80,7 @@ parameters {
 //        skip
     }
 
-/*  triggers {
+  triggers {
     GenericTrigger(
      genericVariables: [
       [key: 'ref', value: '$.ref'],
@@ -100,9 +100,9 @@ parameters {
     )
   }
 
-*/
+
 triggers {
-  GenericTrigger causeString: 'Generic Cause', 
+  GenericTrigger (causeString: 'Generic Cause', 
    genericVariables: [
     [defaultValue: '', key: 'changed_files', regexpFilter: '', value: '$.commits[*].[\'modified\',\'added\',\'removed\'][*]'], 
     [defaultValue: '', key: 'ref', regexpFilter: '', value: '$.ref']
@@ -113,6 +113,7 @@ triggers {
     regexpFilterText: '$changed_files', 
     token: 'accountingservice', 
     tokenCredentialId: ''
+  )
 }
 
 
