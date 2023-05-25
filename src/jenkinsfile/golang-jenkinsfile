@@ -69,7 +69,7 @@ pipeline {
 
 //读取不到，怎么读取？默认怎么设定
 parameters {
-  string defaultValue: 'http://159.223.41.2:30615/root/ta', name: 'srcurl'
+  string defaultValue: 'http://159.223.41.2:30615/root/otlp-demo', name: 'srcurl'
   choice choices: ['dev','master', 'dev'], name: 'gitbranchname'
   booleanParam(name: 'skip_stage', defaultValue: false, description: 'Set to true to skip the test stage')
 }
