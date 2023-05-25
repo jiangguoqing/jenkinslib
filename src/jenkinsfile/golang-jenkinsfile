@@ -5,7 +5,7 @@
 
 def tools = new org.devops.tools()
 //手动填入的变量。（尽量想办法自动化配置流水线）
-String srcurl = ""
+String srcurl = env.srcurl
 
 String branchname = "${env.gitbranchName}"
 //手动填入
