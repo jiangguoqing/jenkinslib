@@ -204,13 +204,13 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             }
         }
 
-
+/*
          stage('maven build') {
              steps {
                  container('maven'){
                      script {
                         sh "chmod +x ./mvnw"
-                        sh "unset $MAVEN_CONFIG"
+                        //sh "unset $MAVEN_CONFIG"
                         //sh "find / -name settings.xml"
                         //sh "echo <localRepository>/root/.m2</localRepository>  >> /usr/share/maven/conf/settings.xml"
                         sh "./mvnw  clean package "
@@ -218,7 +218,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
                  }
              }
          }
-
+*/
 
 
 
