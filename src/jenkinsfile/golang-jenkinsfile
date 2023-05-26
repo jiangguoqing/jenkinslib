@@ -280,7 +280,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
         stage('Build') {
             when { expression { "${skip}" != "true" } }
             steps {
-                container('docker'){
+                container('clean-ci'){
                  script {
                     sh "echo --------- there!"
                     sh "docker info"
