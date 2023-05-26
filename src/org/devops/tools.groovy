@@ -33,7 +33,7 @@ def Docker_Build(images_name,images_tag,branchname){
               dir("src/accountingservice/") {
                 sh "pwd"
               docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
-              def newApp = docker.build -f  "$images_name:${images_tag}"  
+              def newApp = docker.build  "$images_name:${images_tag}"  
               //"src/accountingservice/Dockerfile"
               newApp.push()
               }
