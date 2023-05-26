@@ -30,9 +30,12 @@ def Docker_Build(images_name,images_tag,branchname){
               sh 'docker images'
               sh "echo $images_tag $images_name"
               sh "ls && cd src/accountingservice"
+              dir("src/accountingservice/") {
+                sh "pwd"
               docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
               def newApp = docker.build -f src/accountingservice/Dockerfile "$images_name:${images_tag}"  
               newApp.push()
+              }
               }
               //sh "docker push $images_name:$images_tag"
               //sh 'docker push mrjiangguoqing/gojgq-dev-${GIT_BRANCH}-${GIT_SHA:0:7}-$(date +%s):v5'
