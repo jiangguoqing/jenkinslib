@@ -282,7 +282,7 @@ checkout scmGit(branches: [[name: "*/${branchname}"]], extensions: [], userRemot
             steps {
                 container('docker'){
                  script {
-                    sh "echo ---------"
+                    sh "echo --------- there!"
                     sh "docker info"
                     gitCommit = env.GIT_COMMIT.substring(0,8)
                     unixTime = (new Date().time.intdiv(1000))
