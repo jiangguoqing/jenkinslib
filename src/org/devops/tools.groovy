@@ -14,7 +14,7 @@ def PrintMes(value,color){
 
 
 
-def Docker_Build(images_name,images_tag,branchname){
+def Docker_Build(images_name,images_tag,branchname,dir){
               properties([
                 parameters([
                   string(defaultValue: "$images_name:${images_tag}", description: 'Variable description', name: 'latest_tag', trim: true)
@@ -29,11 +29,10 @@ def Docker_Build(images_name,images_tag,branchname){
               //sh 'docker login  -u mrjiangguoqing -p jgq123'
               sh 'docker images'
               sh "echo $images_tag $images_name"
-              sh "ls && cd src/accountingservice"
               //dir("src/accountingservice/") {
                 sh "pwd"
               docker.withRegistry('https://566420885017.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr'){
-              def newApp = docker.build("$images_name:${images_tag}","-f src/accountingservice/Dockerfile .")  
+              def newApp = docker.build("$images_name:${images_tag}","-f src/${dir}/Dockerfile .")  
               //"src/accountingservice/Dockerfile"
               newApp.push()
               }
